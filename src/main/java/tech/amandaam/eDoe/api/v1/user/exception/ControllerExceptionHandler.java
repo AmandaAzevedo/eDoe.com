@@ -14,4 +14,16 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
     }
+
+    @ExceptionHandler(InvalidNumberOfCaractersException.class)
+    public ResponseEntity<StandardError> invalidNumberOfCaractersException(InvalidNumberOfCaractersException e) {
+        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+    }
+
+    @ExceptionHandler(InvalidUserCategoryException.class)
+    public ResponseEntity<StandardError> invalidUserCategoryException(InvalidUserCategoryException e) {
+        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+    }
 }
