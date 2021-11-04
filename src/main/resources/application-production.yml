@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:${DB_HEROKU_URI}
+    username: ${DB_HEROKU_USER}
+    password: ${DB_HEROKU_PASSWORD}
+    initialization-mode: always
+  jpa:
+    show-sql: true
+    open-in-view: true
+    hibernate:
+      ddl-auto: validate
