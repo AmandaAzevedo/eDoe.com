@@ -1,0 +1,32 @@
+name: Deploy eDoe.com in heroku
+
+on:
+  push:
+    branches: main
+
+jobs:
+  # https://github.com/marketplace/actions/deploy-to-heroku
+  heroku-deploy:
+    runs-on: ubuntu-latest
+    name: Heroku Continuous Deployment
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.5.6 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "edoe" #Must be unique in Heroku
+          heroku_email: ${{secrets.HEROKU_LOGIN}}
+          branch: "main"
+        env:
+          PROFILE_ACTIVE: production
+          DB_URL: ${{secrets.DB_URI_HEROKU}}
+          DB_USER: ${{secrets.DB_USER_HEROKU}}
+          DB_PASSWORD: ${{secrets.DB_PASSWORD_HEROKU}}
+          TOKEN_KEY: ${{secrets.TOKEN_KEY}}
+      # https://github.com/marketplace/actions/broken-links-crawler
+      - uses: ScholliYT/Broken-Links-Crawler-Action@v2.1.1
+        with:
+          website_url: 'http://edoe.herokuapp.com'
+          verbose: 'true'
+          max_retry_time: 240
+          max_retries: 5
