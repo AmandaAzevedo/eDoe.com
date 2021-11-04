@@ -2,8 +2,11 @@ package tech.amandaam.eDoe.api.v1.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.amandaam.eDoe.api.v1.jwt.UserLoginDTO;
 import tech.amandaam.eDoe.api.v1.user.exception.InvalidNumberOfCaractersException;
 import tech.amandaam.eDoe.api.v1.user.exception.UserAlreadyExistsException;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -50,4 +53,20 @@ public class UserService {
             return false;
         }
     }
+
+    public Optional<User> findUserByEmail(String email){
+        Optional<User> searchedUser = userRepository.findByEmail(email);
+        return searchedUser;
+    }
+
+    public boolean validateUser(UserLoginDTO userLogin){
+        Optional<User> optionalUser = findUserByEmail(userLogin.getEmail());
+        if (optionalUser.isPresent() &&
+                optionalUser.get().getPassword().equals(userLogin.getPassword())){
+            return true;
+        } else {
+        return false;
+        }
+    }
+
 }

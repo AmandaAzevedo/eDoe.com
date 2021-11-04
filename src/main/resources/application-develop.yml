@@ -1,3 +1,5 @@
+app:
+  token-key: amanda
 spring:
   datasource:
     driverClassName: org.h2.Driver
