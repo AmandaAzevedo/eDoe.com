@@ -2,16 +2,21 @@ package tech.amandaam.eDoe.api.v1.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.amandaam.eDoe.api.v1.jwt.JwtService;
 import tech.amandaam.eDoe.api.v1.jwt.UserLoginDTO;
+import tech.amandaam.eDoe.api.v1.jwt.exception.PermissionDeniedException;
 import tech.amandaam.eDoe.api.v1.user.exception.InvalidNumberOfCaractersException;
 import tech.amandaam.eDoe.api.v1.user.exception.UserAlreadyExistsException;
 
+import javax.servlet.ServletException;
 import java.util.Optional;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private JwtService jwtService;
 
     public UserDTO createNewUser(UserCreateDTO user) throws UserAlreadyExistsException, InvalidNumberOfCaractersException{
         if (checkIfUserExists(user.getEmail())){
@@ -67,6 +72,12 @@ public class UserService {
         } else {
         return false;
         }
+    }
+
+    public boolean loggedUserExists(String authorizationHeader, String email) {
+        String subject = jwtService.getSujeitoDoToken(authorizationHeader);
+        Optional<User> optUser = userRepository.findByEmail(subject);
+        return optUser.isPresent() && optUser.get().getEmail().equals(email);
     }
 
 }

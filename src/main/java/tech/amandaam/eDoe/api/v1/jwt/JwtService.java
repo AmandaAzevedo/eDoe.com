@@ -37,7 +37,7 @@ public class JwtService {
     private String generateToken(String email) {
         return Jwts.builder().setHeaderParam("typ", "JWT").setSubject(email)
                 .signWith(SignatureAlgorithm.HS512, TOKEN_KEY)
-                .setExpiration(new Date(System.currentTimeMillis() + 60000 * 60 * 24 * 30)).compact();
+                .setExpiration(new Date(System.currentTimeMillis() + 60000 * 60 * 24 * 7)).compact();
     }
 
     private boolean checkIfTheTokenIsBadlyFormattedOrNotExist(String authorizationHeader){
