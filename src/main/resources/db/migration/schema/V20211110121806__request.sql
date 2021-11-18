@@ -1,8 +1,3 @@
---private Long id;
---     private User requestingUser;
---     private UserRoleEnum requestedRole;
---     private boolean evaluationResult;
-
 CREATE SEQUENCE request_sequence
     INCREMENT BY 1
     START WITH 1
