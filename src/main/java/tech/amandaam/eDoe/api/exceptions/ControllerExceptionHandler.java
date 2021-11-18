@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import tech.amandaam.eDoe.api.v1.Request.exception.RequestNotExistException;
+import tech.amandaam.eDoe.api.v1.descriptor.exception.DescriptorAlreadyExistsException;
+import tech.amandaam.eDoe.api.v1.descriptor.exception.DescriptorOptionDoesNotExist;
 import tech.amandaam.eDoe.api.v1.jwt.exception.LoginOrPasswordInvalideException;
 import tech.amandaam.eDoe.api.v1.jwt.exception.PermissionDeniedException;
 import tech.amandaam.eDoe.api.v1.jwt.exception.UserNotExistException;
@@ -59,5 +61,18 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         StandardError err = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
     }
+
+    @ExceptionHandler(DescriptorAlreadyExistsException.class)
+    public ResponseEntity<StandardError> descriptorAlreadyExistsException(DescriptorAlreadyExistsException e) {
+        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+    }
+
+    @ExceptionHandler(DescriptorOptionDoesNotExist.class)
+    public ResponseEntity<StandardError> descriptorOptionDoesNotExist(DescriptorOptionDoesNotExist e) {
+        StandardError err = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
+    }
+
 
 }
