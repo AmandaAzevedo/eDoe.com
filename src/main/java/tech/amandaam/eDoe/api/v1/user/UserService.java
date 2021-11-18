@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.amandaam.eDoe.api.v1.jwt.JwtService;
 import tech.amandaam.eDoe.api.v1.jwt.UserLoginDTO;
-import tech.amandaam.eDoe.api.v1.jwt.exception.PermissionDeniedException;
 import tech.amandaam.eDoe.api.v1.user.exception.InvalidNumberOfCaractersException;
 import tech.amandaam.eDoe.api.v1.user.exception.UserAlreadyExistsException;
 
-import javax.servlet.ServletException;
 import java.util.Optional;
 
 @Service
