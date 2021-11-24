@@ -8,8 +8,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import tech.amandaam.eDoe.api.v1.Request.exception.RequestNotExistException;
 import tech.amandaam.eDoe.api.v1.descriptor.exception.DescriptorAlreadyExistsException;
 import tech.amandaam.eDoe.api.v1.descriptor.exception.DescriptorOptionDoesNotExist;
+import tech.amandaam.eDoe.api.v1.item.exceptions.InvalidDescriptionException;
+import tech.amandaam.eDoe.api.v1.item.exceptions.ItemNotFoundException;
 import tech.amandaam.eDoe.api.v1.jwt.exception.LoginOrPasswordInvalideException;
 import tech.amandaam.eDoe.api.v1.jwt.exception.PermissionDeniedException;
+import tech.amandaam.eDoe.api.v1.jwt.exception.TokenDoesNotExistOrPoorlyFormatted;
 import tech.amandaam.eDoe.api.v1.jwt.exception.UserNotExistException;
 import tech.amandaam.eDoe.api.v1.user.exception.InvalidNumberOfCaractersException;
 import tech.amandaam.eDoe.api.v1.user.exception.InvalidUserCategoryException;
@@ -74,5 +77,21 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
     }
 
+    @ExceptionHandler(TokenDoesNotExistOrPoorlyFormatted.class)
+    public ResponseEntity<StandardError> tokenDoesNotExistOrPoorlyFormatted(TokenDoesNotExistOrPoorlyFormatted e) {
+        StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+    }
 
+    @ExceptionHandler(ItemNotFoundException.class)
+    public ResponseEntity<StandardError> itemNotFoundException(ItemNotFoundException e) {
+        StandardError err = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
+    }
+
+    @ExceptionHandler(InvalidDescriptionException.class)
+    public ResponseEntity<StandardError> invalidDescriptionException(InvalidDescriptionException e) {
+        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+    }
 }

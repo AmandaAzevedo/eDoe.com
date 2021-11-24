@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import tech.amandaam.eDoe.api.v1.jwt.exception.LoginOrPasswordInvalideException;
+import tech.amandaam.eDoe.api.v1.jwt.exception.TokenDoesNotExistOrPoorlyFormatted;
 import tech.amandaam.eDoe.api.v1.user.UserService;
 
 import java.util.Date;
@@ -40,14 +41,14 @@ public class JwtService {
                 .setExpiration(new Date(System.currentTimeMillis() + 60000 * 60 * 24 * 7)).compact();
     }
 
-    private boolean checkIfTheTokenIsBadlyFormattedOrNotExist(String authorizationHeader){
+    private boolean checkIfTheTokenIsBadlyFormattedOrNotExist(String authorizationHeader) throws TokenDoesNotExistOrPoorlyFormatted{
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
-            throw new SecurityException("Token inexistente ou mal formatado!");
+            throw new TokenDoesNotExistOrPoorlyFormatted("Token inexistente ou mal formatado!");
         }
         return false;
     }
 
-    public String getSujeitoDoToken(String authorizationHeader) {
+    public String getSujeitoDoToken(String authorizationHeader) throws TokenDoesNotExistOrPoorlyFormatted {
         checkIfTheTokenIsBadlyFormattedOrNotExist(authorizationHeader);
         // Extraindo apenas o token do cabecalho.
         String token = authorizationHeader.substring(JwtFilter.TOKEN_INDEX);
@@ -55,7 +56,7 @@ public class JwtService {
         try {
             subject = Jwts.parser().setSigningKey(TOKEN_KEY).parseClaimsJws(token).getBody().getSubject();
         } catch (SignatureException e) {
-            throw new SecurityException("Token invalido ou expirado!");
+            throw new TokenDoesNotExistOrPoorlyFormatted("Token invalido ou expirado!");
         }
         return subject;
     }
