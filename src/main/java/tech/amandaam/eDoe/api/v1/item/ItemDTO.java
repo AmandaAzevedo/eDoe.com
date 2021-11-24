@@ -7,6 +7,7 @@ import tech.amandaam.eDoe.api.v1.user.SimpleUserDTO;
 import tech.amandaam.eDoe.api.v1.user.UserDTO;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 @Getter
@@ -25,5 +26,13 @@ public class ItemDTO implements Serializable {
                 .detailedDescription(item.getDetailedDescription())
                 .descriptors(DescriptorDTO.convertToListDescriptorDTO(item.getDescriptors()))
                 .build();
+    }
+
+    public static List<ItemDTO> convertToListItemDTO(List<Item> items){
+        List<ItemDTO> list = new LinkedList<ItemDTO>();
+        for (Item i: items){
+            list.add(converteToItemDTO(i));
+        }
+        return list;
     }
 }

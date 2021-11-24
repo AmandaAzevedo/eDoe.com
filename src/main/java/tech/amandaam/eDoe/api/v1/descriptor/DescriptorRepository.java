@@ -16,4 +16,6 @@ public interface DescriptorRepository extends JpaRepository<Descriptor, Long> {
 
     public List<Descriptor> findAllByOrderByNameAsc();
 
+    public Optional<Descriptor> findById(Long id);
+
 }

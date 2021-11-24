@@ -3,9 +3,11 @@ package tech.amandaam.eDoe.api.v1.item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import tech.amandaam.eDoe.api.v1.descriptor.SimpleDescriptorDTO;
 
 
 import javax.servlet.ServletException;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/item")
@@ -44,4 +46,21 @@ public class ItemController {
         return itemService.updateQuantity(id,updateQuantityDTO, header);
     }
 
+    @GetMapping(value = "/top10")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<SimpleItemDTO> getTop10Items(){
+        return itemService.listTop10();
+    }
+
+    @GetMapping(value = "/listByDescriptor/{id}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<SimpleItemDTO> getItemsPerDescriptor(@PathVariable("id") Long id){
+        return itemService.getItemsPerDescriptor(id);
+    }
+
+    @GetMapping(value = "/listByDescriptorName/{name}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<SimpleItemDTO> getItemsByDescriptorName(@PathVariable("name") String name){
+        return itemService.getItemsByDescriptorName(name);
+    }
 }

@@ -95,4 +95,8 @@ public class DescriptorService {
         }
     }
 
+    public Optional<Descriptor> getById(Long id){
+        return descriptorRepository.findById(id);
+    }
+
 }

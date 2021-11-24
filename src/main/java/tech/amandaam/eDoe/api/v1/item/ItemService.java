@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.amandaam.eDoe.api.v1.descriptor.Descriptor;
 import tech.amandaam.eDoe.api.v1.descriptor.DescriptorService;
+import tech.amandaam.eDoe.api.v1.descriptor.SimpleDescriptorDTO;
+import tech.amandaam.eDoe.api.v1.descriptor.exception.DescriptorDoesNotExistException;
 import tech.amandaam.eDoe.api.v1.item.exceptions.InvalidDescriptionException;
 import tech.amandaam.eDoe.api.v1.item.exceptions.ItemNotFoundException;
 import tech.amandaam.eDoe.api.v1.item.exceptions.MandatoryFieldNotFilledIn;
@@ -122,5 +124,40 @@ public class ItemService {
         return ItemDTO.converteToItemDTO(this.itemRepository.save(item));
     }
 
+    public List<SimpleItemDTO> getItemsByDescriptorName(String nameSearch){
+        List<SimpleItemDTO> list = new LinkedList<>();
+        for (Item i: this.itemRepository.findAll()){
+            for (Descriptor d: i.getDescriptors()){
+                if (d.getName().contains(nameSearch)) {
+                    list.add(SimpleItemDTO.converteToSimpleItemDTO(i));
+                }
+            }
+        }
+        return list;
+    }
+
+    private List<Item> checkDescriptors(List<Item> items, String descriptorNameSearch){
+        List<Item> list = new LinkedList<>();
+        for (Item i: items){
+            for (Descriptor d: i.getDescriptors()){
+                if (descriptorNameSearch.equals(d.getName())) {
+                    list.add(i);
+                }
+            }
+        }
+        return list;
+    }
+
+    public List<SimpleItemDTO> getItemsPerDescriptor(Long id){
+     Optional<Descriptor> optionalDescriptor = descriptorService.getById(id);
+    if(!optionalDescriptor.isPresent()){
+        throw new DescriptorDoesNotExistException("O descritor de ID " + id + " não existe.");
+    }
+    return SimpleItemDTO.convertToListSimpleItemDTO(checkDescriptors(itemRepository.findAll(),descriptorService.normalizesDescriptorName(optionalDescriptor.get().getName())));
+    }
+
+    public List<SimpleItemDTO> listTop10(){
+        return SimpleItemDTO.convertToListSimpleItemDTO(itemRepository.findTop10ByOrderByQuantityDesc());
+    }
 
 }
