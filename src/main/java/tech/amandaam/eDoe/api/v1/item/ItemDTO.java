@@ -14,17 +14,19 @@ import java.util.List;
 @Builder
 public class ItemDTO implements Serializable {
     private Long id;
-    private SimpleUserDTO owner;
+    private SimpleUserDTO user;
     private Long quantity;
-    private String detailedDescription;
+    private String descriptionOrJustification;
     private List<DescriptorDTO> descriptors;
+    private ItemTypeEnum itemType;
 
     public static ItemDTO converteToItemDTO(Item item){
         return ItemDTO.builder().id(item.getId())
-                .owner(SimpleUserDTO.convertToUserDTO(item.getOwner()))
+                .user(SimpleUserDTO.convertToUserDTO(item.getUser()))
                 .quantity(item.getQuantity())
-                .detailedDescription(item.getDetailedDescription())
+                .descriptionOrJustification(item.getDescriptionOrJustification())
                 .descriptors(DescriptorDTO.convertToListDescriptorDTO(item.getDescriptors()))
+                .itemType(item.getItemType())
                 .build();
     }
 

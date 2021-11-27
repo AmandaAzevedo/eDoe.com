@@ -10,6 +10,7 @@ import java.util.Optional;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
     public Optional<Item> findById(Long id);
-    public List<Item> findTop10ByOrderByQuantityDesc();
+    public List<Item> findTop10ByItemTypeOrderByQuantityDesc(ItemTypeEnum itemType);
     public List<Item> findAll();
+    public List<Item> findAllByItemType(ItemTypeEnum itemType);
 }

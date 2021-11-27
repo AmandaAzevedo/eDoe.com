@@ -10,6 +10,7 @@ import tech.amandaam.eDoe.api.v1.descriptor.exception.DescriptorAlreadyExistsExc
 import tech.amandaam.eDoe.api.v1.descriptor.exception.DescriptorOptionDoesNotExist;
 import tech.amandaam.eDoe.api.v1.item.exceptions.InvalidDescriptionException;
 import tech.amandaam.eDoe.api.v1.item.exceptions.ItemNotFoundException;
+import tech.amandaam.eDoe.api.v1.item.exceptions.MandatoryFieldNotFilledIn;
 import tech.amandaam.eDoe.api.v1.jwt.exception.LoginOrPasswordInvalideException;
 import tech.amandaam.eDoe.api.v1.jwt.exception.PermissionDeniedException;
 import tech.amandaam.eDoe.api.v1.jwt.exception.TokenDoesNotExistOrPoorlyFormatted;
@@ -91,6 +92,12 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(InvalidDescriptionException.class)
     public ResponseEntity<StandardError> invalidDescriptionException(InvalidDescriptionException e) {
+        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+    }
+
+    @ExceptionHandler(MandatoryFieldNotFilledIn.class)
+    public ResponseEntity<StandardError> mandatoryFieldNotFilledIn(MandatoryFieldNotFilledIn e) {
         StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
     }

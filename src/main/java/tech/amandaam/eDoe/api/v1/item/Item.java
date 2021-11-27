@@ -20,9 +20,9 @@ public class Item {
     @SequenceGenerator(name="item_generator",sequenceName = "item_sequence", allocationSize = 1)
     private Long id;
     @ManyToOne
-    private User owner;
+    private User user;
     private Long quantity;
-    private String detailedDescription;
+    private String descriptionOrJustification;
     @ManyToMany
     @JoinTable(
             name = "item_descriptor",
@@ -30,4 +30,6 @@ public class Item {
             inverseJoinColumns = @JoinColumn(name = "descriptor_id")
     )
     private List<Descriptor> descriptors;
+    @Enumerated(EnumType.STRING)
+    private ItemTypeEnum itemType;
 }

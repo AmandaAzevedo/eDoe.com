@@ -6,8 +6,10 @@ import java.util.List;
 
 @Getter
 public class ItemCreateDTO implements Serializable {
-    private String ownerEmail;
+    private String userEmail;
     private Long quantity;
-    private String detailedDescription;
+    private String descriptionOrJustification;
     private List<String> descriptors;
+    private ItemTypeEnum itemType;
+
 }

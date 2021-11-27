@@ -12,13 +12,13 @@ import java.util.List;
 @Getter
 @Builder
 public class SimpleItemDTO implements Serializable {
-    private String detailedDescription;
+    private String descriptionOrJustification;
     private Long quantity;
 
     public static SimpleItemDTO converteToSimpleItemDTO(Item item){
         return SimpleItemDTO.builder()
                 .quantity(item.getQuantity())
-                .detailedDescription(item.getDetailedDescription()).build();
+                .descriptionOrJustification(item.getDescriptionOrJustification()).build();
     }
 
     public static List<SimpleItemDTO> convertToListSimpleItemDTO(List<Item> items){
