@@ -2,6 +2,7 @@ package tech.amandaam.eDoe.api.v1.item;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.amandaam.eDoe.api.util.StringUtil;
 import tech.amandaam.eDoe.api.v1.descriptor.Descriptor;
 import tech.amandaam.eDoe.api.v1.descriptor.DescriptorService;
 import tech.amandaam.eDoe.api.v1.descriptor.exception.DescriptorDoesNotExistException;
@@ -33,7 +34,7 @@ public class ItemService {
     private List<Descriptor> convertToDescriptors(List<String> descriptorsName, String token){
         List<Descriptor> descriptors = new LinkedList<Descriptor>();
         for (String name: descriptorsName){
-            name = descriptorService.normalizesDescriptorName(name);
+            name = StringUtil.normalize(name);
             if (descriptorService.descriptorAlreadyExists(name)){
                 descriptors.add(descriptorService.getDescriptorByName(name).get());
             } else{

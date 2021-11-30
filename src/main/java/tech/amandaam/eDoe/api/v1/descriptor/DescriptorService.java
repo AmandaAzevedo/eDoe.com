@@ -24,13 +24,6 @@ public class DescriptorService {
     @Autowired
     private UserService userService;
 
-    public String normalizesDescriptorName(String descriptorName){
-        descriptorName = StringUtil.removeAccents(descriptorName);
-        descriptorName = StringUtil.removeSpaces(descriptorName);
-        descriptorName = StringUtil.toLowerCase(descriptorName);
-        return descriptorName;
-    }
-
     public boolean descriptorAlreadyExists (String descriptorName) {
         if (descriptorRepository.existsByName(descriptorName)){
             return true;
@@ -62,7 +55,7 @@ public class DescriptorService {
         }
         Descriptor newDescriptor = Descriptor.builder()
                 .name(descriptorCreateDTO.getName()).build();
-        newDescriptor.setName(this.normalizesDescriptorName(newDescriptor.getName()));
+        newDescriptor.setName(StringUtil.normalize(newDescriptor.getName()));
         if (descriptorAlreadyExists(newDescriptor.getName())){
             throw new DescriptorAlreadyExistsException("O descritor " + newDescriptor.getName() + " já existe.");
         }
@@ -77,7 +70,7 @@ public class DescriptorService {
         }
         Descriptor newDescriptor = Descriptor.builder()
                 .name(descriptorName).build();
-        newDescriptor.setName(this.normalizesDescriptorName(newDescriptor.getName()));
+        newDescriptor.setName(StringUtil.normalize(newDescriptor.getName()));
         return descriptorRepository.save(newDescriptor);
     }
 

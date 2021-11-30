@@ -97,7 +97,7 @@ public class ItemController {
     }
 
 
-    @GetMapping(value = "/grantee/listByDescriptorName/{name}")
+    @GetMapping(value = "/grantee/listByDescriptorName/")
     @ResponseStatus(code = HttpStatus.OK)
     public List<SimpleItemDTO> getGranteeItemsByDescriptorName(@RequestBody DonationItemsByDescriptorNameDTO donationItemsByDescriptorName){
         return itemService.getItemsByDescriptorName(donationItemsByDescriptorName, ItemTypeEnum.GRANTEE);

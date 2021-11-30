@@ -17,4 +17,11 @@ public class StringUtil {
     public static String toLowerCase(String string){
         return string.toLowerCase();
     }
+
+    public static String normalize(String string){
+        string = StringUtil.removeAccents(string);
+        string = StringUtil.removeSpaces(string);
+        string = StringUtil.toLowerCase(string);
+        return string;
+    }
 }

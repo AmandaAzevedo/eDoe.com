@@ -8,6 +8,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import tech.amandaam.eDoe.api.v1.Request.exception.RequestNotExistException;
 import tech.amandaam.eDoe.api.v1.descriptor.exception.DescriptorAlreadyExistsException;
 import tech.amandaam.eDoe.api.v1.descriptor.exception.DescriptorOptionDoesNotExist;
+import tech.amandaam.eDoe.api.v1.donation.exception.NumberOfItemsRequiredInvalidException;
 import tech.amandaam.eDoe.api.v1.item.exceptions.InvalidDescriptionException;
 import tech.amandaam.eDoe.api.v1.item.exceptions.ItemNotFoundException;
 import tech.amandaam.eDoe.api.v1.item.exceptions.MandatoryFieldNotFilledIn;
@@ -98,6 +99,12 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(MandatoryFieldNotFilledIn.class)
     public ResponseEntity<StandardError> mandatoryFieldNotFilledIn(MandatoryFieldNotFilledIn e) {
+        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+    }
+
+    @ExceptionHandler(NumberOfItemsRequiredInvalidException.class)
+    public ResponseEntity<StandardError> mandatoryFieldNotFilledIn(NumberOfItemsRequiredInvalidException e) {
         StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
     }
