@@ -30,7 +30,7 @@ public class JwtService {
     }
 
     /**
-     * Este método gera um token que possui validade de 30 dias.
+     * Este método gera um token que possui validade de 7 dias.
      * @author AmandaAzevedo
      * @param email
      * @return token <String>
