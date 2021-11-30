@@ -9,7 +9,7 @@ import tech.amandaam.eDoe.api.v1.item.ItemDTO;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/blaba")
+@RequestMapping(value = "/api/v1/matches")
 public class MatchesController {
     @Autowired
     private MatchesService matchesService;

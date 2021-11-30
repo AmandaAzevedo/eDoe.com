@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 import tech.amandaam.eDoe.api.util.StringUtil;
 import tech.amandaam.eDoe.api.v1.descriptor.Descriptor;
 import tech.amandaam.eDoe.api.v1.descriptor.DescriptorRepository;
+import tech.amandaam.eDoe.api.v1.item.Item;
 import tech.amandaam.eDoe.api.v1.item.ItemDTO;
 import tech.amandaam.eDoe.api.v1.item.ItemRepository;
 import tech.amandaam.eDoe.api.v1.item.ItemTypeEnum;
+import tech.amandaam.eDoe.api.v1.item.exceptions.ItemNotFoundException;
 import tech.amandaam.eDoe.api.v1.jwt.JwtService;
 import tech.amandaam.eDoe.api.v1.jwt.exception.PermissionDeniedException;
 import tech.amandaam.eDoe.api.v1.user.User;
@@ -42,11 +44,8 @@ public class MatchesService {
         if (!userService.loggedUserExists(token, email) || !checkUserRole(email)) {
             throw new PermissionDeniedException("Usuário nao tem permissão");
         }
-        if (!descriptorRepository.existsByName(StringUtil.normalize(matchesDTO.getDescriptor()))){
-            return new LinkedList<>();
-        }
-        Descriptor descriptor = descriptorRepository.findByName(StringUtil.normalize(matchesDTO.getDescriptor())).get();
-        return ItemDTO.convertToListItemDTO(this.itemRepository.findAllByDescriptorsContainingAndItemType(descriptor, ItemTypeEnum.DONATION));
+        Item item = itemRepository.findById(matchesDTO.getItemId()).orElseThrow(() -> new ItemNotFoundException("Item não foi encontrado ou não existe"));
+        return ItemDTO.convertToListItemDTO(this.itemRepository.findAllDistinctByDescriptorsInAndItemType(item.getDescriptors(), ItemTypeEnum.DONATION));
     }
 
 }

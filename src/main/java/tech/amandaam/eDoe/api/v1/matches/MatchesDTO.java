@@ -1,12 +1,12 @@
 package tech.amandaam.eDoe.api.v1.matches;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
-@Builder
+@Setter
 @Getter
 public class MatchesDTO implements Serializable {
-    private String descriptor;
+    private Long itemId;
 }
