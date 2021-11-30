@@ -1,10 +1,10 @@
-package tech.amandaam.eDoe.api.v1.Request;
+package tech.amandaam.eDoe.api.v1.request;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.amandaam.eDoe.api.v1.Request.exception.RequestNotExistException;
+import tech.amandaam.eDoe.api.v1.request.exception.RequestNotExistException;
 import tech.amandaam.eDoe.api.v1.jwt.JwtService;
 import tech.amandaam.eDoe.api.v1.jwt.exception.PermissionDeniedException;
 import tech.amandaam.eDoe.api.v1.jwt.exception.UserNotExistException;

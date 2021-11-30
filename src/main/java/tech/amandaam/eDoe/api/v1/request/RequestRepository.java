@@ -1,4 +1,4 @@
-package tech.amandaam.eDoe.api.v1.Request;
+package tech.amandaam.eDoe.api.v1.request;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

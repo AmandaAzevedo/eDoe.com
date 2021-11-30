@@ -1,4 +1,4 @@
-package tech.amandaam.eDoe.api.v1.Request;
+package tech.amandaam.eDoe.api.v1.request;
 
 import lombok.Getter;
 import tech.amandaam.eDoe.api.v1.user.UserRoleEnum;

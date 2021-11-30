@@ -1,4 +1,4 @@
-package tech.amandaam.eDoe.api.v1.Request;
+package tech.amandaam.eDoe.api.v1.request;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

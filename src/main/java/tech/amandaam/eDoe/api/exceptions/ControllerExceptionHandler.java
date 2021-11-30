@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import tech.amandaam.eDoe.api.v1.Request.exception.RequestNotExistException;
+import tech.amandaam.eDoe.api.v1.request.exception.RequestNotExistException;
 import tech.amandaam.eDoe.api.v1.descriptor.exception.DescriptorAlreadyExistsException;
 import tech.amandaam.eDoe.api.v1.descriptor.exception.DescriptorOptionDoesNotExist;
 import tech.amandaam.eDoe.api.v1.donation.exception.NumberOfItemsRequiredInvalidException;
@@ -19,8 +19,6 @@ import tech.amandaam.eDoe.api.v1.jwt.exception.UserNotExistException;
 import tech.amandaam.eDoe.api.v1.user.exception.InvalidNumberOfCaractersException;
 import tech.amandaam.eDoe.api.v1.user.exception.InvalidUserCategoryException;
 import tech.amandaam.eDoe.api.v1.user.exception.UserAlreadyExistsException;
-
-import javax.servlet.ServletException;
 
 @ControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {

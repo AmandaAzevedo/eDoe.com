@@ -1,11 +1,9 @@
-package tech.amandaam.eDoe.api.v1.Request;
+package tech.amandaam.eDoe.api.v1.request;
 
 import lombok.*;
 import tech.amandaam.eDoe.api.v1.user.User;
-import tech.amandaam.eDoe.api.v1.user.UserDTO;
 import tech.amandaam.eDoe.api.v1.user.UserRoleEnum;
 
-import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
