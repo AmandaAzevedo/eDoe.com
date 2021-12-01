@@ -16,7 +16,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "edoe" #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_LOGIN}}
-          branch: "main"
+          branch: "master"
         env:
           PROFILE_ACTIVE: production
           DB_URL: ${{secrets.DB_URI_HEROKU}}
