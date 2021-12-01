@@ -1,6 +1,7 @@
 package tech.amandaam.eDoe.api.v1.request;
 
 import lombok.*;
+import tech.amandaam.eDoe.api.v1.user.SimpleUserDTO;
 import tech.amandaam.eDoe.api.v1.user.User;
 import tech.amandaam.eDoe.api.v1.user.UserRoleEnum;
 
@@ -13,13 +14,13 @@ import java.util.List;
 public class RequestDTO implements Serializable {
 
     private Long id;
-    private User requestingUser;
+    private SimpleUserDTO requestingUser;
     private UserRoleEnum requestedRole;
     private boolean evaluationResult;
 
     public static RequestDTO convertToRequestDTO(Request request){
         return RequestDTO.builder().id(request.getId())
-                .requestingUser(request.getRequestingUser())
+                .requestingUser(SimpleUserDTO.convertToSimpleUserDTO(request.getRequestingUser()))
                 .requestedRole(request.getRequestedRole())
                 .evaluationResult(request.isEvaluationResult()).build();
     }

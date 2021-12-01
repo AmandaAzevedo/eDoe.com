@@ -2,8 +2,6 @@ package tech.amandaam.eDoe.api.v1.item;
 
 import lombok.Builder;
 import lombok.Getter;
-import tech.amandaam.eDoe.api.v1.descriptor.DescriptorDTO;
-import tech.amandaam.eDoe.api.v1.user.SimpleUserDTO;
 
 import java.io.Serializable;
 import java.util.LinkedList;

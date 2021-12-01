@@ -61,18 +61,22 @@ public class DonationService {
 
         Long resultD;
         Long resultR;
+        Long quantity;
 
         if (dtoQuantity.equals(donate)){
             itemRepository.delete(donatedItem);
             resultD = 0L;
+            quantity = donationCreateDTO.getAmountToBeDonated();
         } else if (dtoQuantity > donate){
             itemRepository.delete(donatedItem);
             resultD = Long.valueOf(dtoQuantity-donate);
             requiredItem.setQuantity(resultD);
+            quantity = Long.valueOf(resultD);
         } else {
             resultD = Long.valueOf(donate - dtoQuantity);
             donatedItem.setQuantity(resultD);
             itemRepository.save(donatedItem);
+            quantity = Long.valueOf(resultD);
         }
 
         if (dtoQuantity.equals(required)) {
@@ -87,10 +91,10 @@ public class DonationService {
 
         Donation newDonation = Donation.builder()
                 .donationDate(data)
-                .donorUser(requiredItem.getUser())
-                .receivingUser(donatedItem.getUser())
+                .donorUser(donatedItem.getUser())
+                .receivingUser(requiredItem.getUser())
                 .descriptionDonatedItem(donatedItem.getDescriptionOrJustification())
-                .quantityOfDonatedItem(resultD).build();
+                .quantityOfDonatedItem(quantity).build();
         newDonation = this.donationRepository.save(newDonation);
         return DonationDTO.convertToDonationDTO(newDonation);
     }

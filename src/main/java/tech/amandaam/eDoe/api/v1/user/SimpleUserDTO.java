@@ -13,7 +13,7 @@ public class SimpleUserDTO implements Serializable {
     private String name;
     private String email;
 
-    public static SimpleUserDTO convertToUserDTO(User u) {
+    public static SimpleUserDTO convertToSimpleUserDTO(User u) {
         return SimpleUserDTO.builder().id(u.getId()).name(u.getName()).email(u.getEmail()).build();
     }
 }

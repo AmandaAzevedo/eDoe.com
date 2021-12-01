@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import tech.amandaam.eDoe.api.v1.descriptor.DescriptorDTO;
 import tech.amandaam.eDoe.api.v1.user.SimpleUserDTO;
-import tech.amandaam.eDoe.api.v1.user.UserDTO;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -22,7 +21,7 @@ public class ItemDTO implements Serializable {
 
     public static ItemDTO converteToItemDTO(Item item){
         return ItemDTO.builder().id(item.getId())
-                .user(SimpleUserDTO.convertToUserDTO(item.getUser()))
+                .user(SimpleUserDTO.convertToSimpleUserDTO(item.getUser()))
                 .quantity(item.getQuantity())
                 .descriptionOrJustification(item.getDescriptionOrJustification())
                 .descriptors(DescriptorDTO.convertToListDescriptorDTO(item.getDescriptors()))
