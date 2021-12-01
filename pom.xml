@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>tech.amandaam</groupId>
 	<artifactId>eDoe</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>eDoe</name>
 	<description>Projeto da disciplina de DSC</description>
 	<properties>
