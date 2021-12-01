@@ -1,3 +1,5 @@
+app:
+  token-key: ${TOKEN_KEY}}
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
