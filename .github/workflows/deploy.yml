@@ -2,7 +2,7 @@ name: Deploy eDoe.com in heroku
 
 on:
   push:
-    branches: main
+    branches: master
 
 jobs:
   # https://github.com/marketplace/actions/deploy-to-heroku
