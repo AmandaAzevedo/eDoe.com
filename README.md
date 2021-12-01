@@ -290,3 +290,5 @@ End-point GET para listar todas as doações feitas.
 ## Observações
 * Usuários com a permissão de ADMIN poderão realizar todas as funcionalidades.
 * O arquivo testes_insomnia.json contem todas os arquivos .json para realizar testes com os endpoints. Além disso, os testes poderam ser feitos no _/swagger-ui.html_.
+
+---
