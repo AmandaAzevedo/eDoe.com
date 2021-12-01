@@ -87,8 +87,8 @@ O endpoint relacionado a funcionalidade de match é [`/api/v1/matches`](README.m
 
 ## Funcionalidades por end-point
 
-### /api/v1/user/register
-Esse endpoint é responsável pelo cadastro de usuários. Para realizar o cadastro deve-se fazer uma requisição utilizando o método POST, informar um email, 
+### /api/v1/user/
+Esse endpoint é responsável pelo cadastro de usuários, ele utiliza o método POST. Para realizar o cadastro deve-se fazer uma requisição utilizando o método POST, informar um email, 
 nome da pessoa, ou organização a ser cadastrada, senha, telefone, e categoria do usuário, que pode ser dos tipos: 
 
 * PRIVATE_INDIVIDUAL (pessoa física), 
@@ -146,8 +146,8 @@ End-poit para que os usuários do tipo ADMIN aceitem ou recusem a solicitação 
 }
 ```
 
-### /api/v1/descriptors/create
-End-point utilizado para criar descritores. Deve ser enviada uma requisição POST para o end-point, fornescido o nome do descritor a ser cadastrado `name` e um token válido.
+### /api/v1/descriptors/
+End-point POST utilizado para criar descritores. Deve ser enviada uma requisição POST para o end-point, fornescido o nome do descritor a ser cadastrado `name` e um token válido.
 
 ```json
 {
@@ -156,7 +156,7 @@ End-point utilizado para criar descritores. Deve ser enviada uma requisição PO
 ```
 
 ### /api/v1/descriptors/
-End-point que lista os descritores cadastrados. Deve ser enviada uma requisição GET para o end-point, com um token válido, e um JSON com o campo `optionsToGetTheDescriptorEnum` preenchido com as opções: `ASC`, para listar os descritores em uma ordem ascendente e `DESC` descrescente (ordem alfabética).
+End-point GET que lista os descritores cadastrados. Deve ser enviada uma requisição GET para o end-point, com um token válido, e um JSON com o campo `optionsToGetTheDescriptorEnum` preenchido com as opções: `ASC`, para listar os descritores em uma ordem ascendente e `DESC` descrescente (ordem alfabética).
 
 ```json
 {
@@ -164,8 +164,8 @@ End-point que lista os descritores cadastrados. Deve ser enviada uma requisiçã
 }
 ```
 
-### /api/v1/item/create
-End-point que cria um item. Ver mais sobre [tipos de item](README.md#tipos-de-item). Um item pode ser dos tipos doador e receptor. 
+### /api/v1/item/
+End-point POST que cria um item. Ver mais sobre [tipos de item](README.md#tipos-de-item). Um item pode ser dos tipos doador e receptor. 
 
 Para criar um item necessário deve ser enviada uma requisição do tipo POST, informando os campos do JSON abaixo, além de um token válido. Apenas usuários que tenham permissão de receptor poderá criar um item necessário.
 O campo `descriptionOrJustification` deve conter a justificação do item necessário. Já o campo `descriptors` deve conter uma lista de nomes de descritores, caso o nome do descritor informado não exista, o sistema criará um descritor com o nome informado.  
@@ -187,19 +187,20 @@ Por fim, o campo `userEmail` deve conter o e-mail do usuário que está cadastra
 Já para criar um item a ser doado, o usuário deve informar os mesmos campos, com a diferença de que o campo `descriptionOrJustification` deverá conter a descrição do item a ser doado,
 o campo `itemType` deve ser do tipo `DONATION`, e só poderá executar esta funcionalidade usuários que tenham permissão de doador.
 
-### /api/v1/item/donation/delete/{id}
-End-point para deletar um item a ser doado. No lugar de {id} deve-se informar o id do item, além disso, deve-se informar um token válido. Apenas o dono do item pode deletá-lo
+### /api/v1/item/donation/{id}
+End-point DELETE para deletar um item a ser doado. No lugar de {id} deve-se informar o id do item, além disso, deve-se informar um token válido. Apenas o dono do item pode deletá-lo
 
-### /api/v1/item/grantee/delete/{id}
-End-point para deletar um item necessário. No lugar de {id} deve-se informar o id do item, além disso, deve-se informar um token válido. Apenas o dono do item pode deletá-lo
+### /api/v1/item/grantee/{id}
+End-point DELETE para deletar um item necessário. No lugar de {id} deve-se informar o id do item, além disso, deve-se informar um token válido. Apenas o dono do item pode deletá-lo
 
-### /api/v1/item/donation/listByDescriptorId/{id}
+### /api/v1/item/donation/list/descriptor/{id}
 End-point GET para listar os itens a serem doados que possuiem determinado descritor. O id do descritor deve ser informado no lugar de {id}.
 
-### /api/v1/item/grantee/listByDescriptorId/{id}
+### /api/v1/item/grantee/list/descriptor/{id}
 End-point GET para listar os itens a necessários que possuiem determinado descritor. O id do descritor deve ser informado no lugar de {id}.
 
-### /api/v1/item/donation/listByDescriptorName/
+### /api/v1/item/donation/list/descriptor/name/
+End-point GET para listar os itens a serem doados que possuiem determinado descritor. O `name` do descritor deve ser informado no JSON, conforme o exemplo abaixo.
 
 ```json
 {
@@ -207,7 +208,8 @@ End-point GET para listar os itens a necessários que possuiem determinado descr
 }
 ```
 
-### /api/v1/item/grantee/listByDescriptorName/
+### /api/v1/item/grantee/list/descriptor/name/
+End-point GET para listar os itens a necessários que possuiem determinado descritor. O `name` do descritor deve ser informado no JSON, conforme o exemplo abaixo.
 
 ```json
 {
@@ -223,7 +225,7 @@ End-point GET para listar os descritores que mais possuem itens cadastrados para
 End-point GET para listar os descritores que mais possuem itens necessários cadastrados relacionados.
 
 
-### /api/v1/item/donation/update/description/{id}
+### /api/v1/item/donation/description/{id}
 End-point PATCH para editar a descrição do item a ser doado. O id do item deve ser informado no lugar de {id}, além disso deve ser informado o token do usuário relacionado.
 Também deve ser enviado um JSON com a nova descrição.
 
@@ -233,7 +235,7 @@ Também deve ser enviado um JSON com a nova descrição.
 }
 ```
 
-### /api/v1/item/grantee/update/justification/{id}
+### /api/v1/item/grantee/justification/{id}
 End-point PATCH para editar a justificativa do item necessário. O id do item deve ser informado no lugar de {id}, além disso deve ser informado o token do usuário relacionado.
 Também deve ser enviado um JSON com a nova justificativa. 
 
@@ -243,7 +245,7 @@ Também deve ser enviado um JSON com a nova justificativa.
 }
 ```
 
-### /api/v1/item/donation/update/quantity/{id}
+### /api/v1/item/donation/quantity/{id}
 End-point PATCH para editar a quantidade de itens para doação. O id do item deve ser informado no lugar de {id}, além disso deve ser informado o token do usuário relacionado.
 Também deve ser enviado um JSON com a nova quantidade de itens.
 
@@ -253,7 +255,7 @@ Também deve ser enviado um JSON com a nova quantidade de itens.
 }
 ```
 
-### /api/v1/item/grantee/update/quantity/{id}
+### /api/v1/item/grantee/quantity/{id}
 End-point PATCH para editar a quantidade de itens necessários. O id do item deve ser informado no lugar de {id}, além disso deve ser informado o token do usuário relacionado.
 Também deve ser enviado um JSON com a nova quantidade de itens.
 
@@ -272,7 +274,7 @@ End-point GET para listar os matches de um determinado item necessário. Ver mai
 }
 ```
 
-### /api/v1/donation/create
+### /api/v1/donation/
 End-point PATCH para realizar uma doação. Apenas usuários com a permissão de receptor poderá realizar a doação. 
 Para essa funcionalidade deve-se enviar o token do usuário e um JSON com a quantidades de itens que se quer receber a doação, o ID do item que está para doação e o ID do item necessário.
 

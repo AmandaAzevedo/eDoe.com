@@ -14,7 +14,7 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @PostMapping("/create")
+    @PostMapping("/")
     @ResponseStatus(code = HttpStatus.CREATED)
     public ItemDTO createNewItemDonation(@RequestBody ItemCreateDTO itemCreateDTO, @RequestHeader("Authorization") String header) throws ServletException {
         return itemService.createItem(header, itemCreateDTO);
@@ -26,19 +26,19 @@ public class ItemController {
 
 
 
-    @DeleteMapping(value = "/donation/delete/{id}")
+    @DeleteMapping(value = "/donation/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public void deleteDonationDisciplineById(@PathVariable("id") Long id, @RequestHeader("Authorization") String header) throws ServletException {
         itemService.deleteItem(id, header);
     }
 
-    @PatchMapping (value = "/donation/update/description/{id}")
+    @PatchMapping (value = "/donation/description/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public ItemDTO updateDescriptionDetailed(@PathVariable("id") Long id, @RequestBody UpdateDescriptionOrJustificationDTO updateDetailedDescriptionDTO, @RequestHeader("Authorization") String header) throws ServletException {
         return itemService.updateDetailedDescriptionOrMotivation(id,updateDetailedDescriptionDTO, header);
     }
 
-    @PatchMapping (value = "/donation/update/quantity/{id}")
+    @PatchMapping (value = "/donation/quantity/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public ItemDTO updateQuantityItemDonation(@PathVariable("id") Long id, @RequestBody UpdateQuantityDTO updateQuantityDTO, @RequestHeader("Authorization") String header) throws ServletException {
         return itemService.updateQuantity(id,updateQuantityDTO, header);
@@ -50,14 +50,14 @@ public class ItemController {
         return itemService.listTop10(ItemTypeEnum.DONATION);
     }
 
-    @GetMapping(value = "/donation/listByDescriptorId/{id}")
+    @GetMapping(value = "/donation/list/descriptor/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public List<SimpleItemDTO> getDonationItemsPerDescriptor(@PathVariable("id") Long id){
         return itemService.getItemsPerDescriptor(id, ItemTypeEnum.DONATION);
     }
 
 
-    @GetMapping(value = "/donation/listByDescriptorName/")
+    @GetMapping(value = "/donation/list/descriptor/name")
     @ResponseStatus(code = HttpStatus.OK)
     public List<SimpleItemDTO> getDonationItemsByDescriptorName(@RequestBody DonationItemsByDescriptorNameDTO donationItemsByDescriptorName){
         return itemService.getItemsByDescriptorName(donationItemsByDescriptorName, ItemTypeEnum.DONATION);
@@ -66,19 +66,19 @@ public class ItemController {
 
     //============================
 
-    @DeleteMapping(value = "/grantee/delete/{id}")
+    @DeleteMapping(value = "/grantee/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public void deleteGranteeDisciplineById(@PathVariable("id") Long id, @RequestHeader("Authorization") String header) throws ServletException {
         itemService.deleteItem(id, header);
     }
 
-    @PatchMapping (value = "/grantee/update/justification/{id}")
+    @PatchMapping (value = "/grantee/justification/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public ItemDTO updateJustification(@PathVariable("id") Long id, @RequestBody UpdateDescriptionOrJustificationDTO updateDetailedDescriptionDTO, @RequestHeader("Authorization") String header) throws ServletException {
         return itemService.updateDetailedDescriptionOrMotivation(id,updateDetailedDescriptionDTO, header);
     }
 
-    @PatchMapping (value = "/grantee/update/quantity/{id}")
+    @PatchMapping (value = "/grantee/quantity/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public ItemDTO updateQuantityItemGrantee(@PathVariable("id") Long id, @RequestBody UpdateQuantityDTO updateQuantityDTO, @RequestHeader("Authorization") String header) throws ServletException {
         return itemService.updateQuantity(id,updateQuantityDTO, header);
@@ -90,14 +90,14 @@ public class ItemController {
         return itemService.listTop10(ItemTypeEnum.GRANTEE);
     }
 
-    @GetMapping(value = "/grantee/listByDescriptorId/{id}")
+    @GetMapping(value = "/grantee/list/descriptor/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public List<SimpleItemDTO> getGranteeItemsPerDescriptor(@PathVariable("id") Long id){
         return itemService.getItemsPerDescriptor(id, ItemTypeEnum.GRANTEE);
     }
 
 
-    @GetMapping(value = "/grantee/listByDescriptorName/")
+    @GetMapping(value = "/grantee/list/descriptor/name")
     @ResponseStatus(code = HttpStatus.OK)
     public List<SimpleItemDTO> getGranteeItemsByDescriptorName(@RequestBody DonationItemsByDescriptorNameDTO donationItemsByDescriptorName){
         return itemService.getItemsByDescriptorName(donationItemsByDescriptorName, ItemTypeEnum.GRANTEE);

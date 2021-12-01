@@ -13,7 +13,7 @@ public class DonationController {
     @Autowired
     private DonationService donationService;
 
-    @PatchMapping(value = "/create")
+    @PatchMapping(value = "/")
     @ResponseStatus(code = HttpStatus.OK)
     public DonationDTO donation (@RequestBody DonationCreateDTO donationCreateDTO, @RequestHeader("Authorization") String token ){
         return donationService.donation(donationCreateDTO, token);

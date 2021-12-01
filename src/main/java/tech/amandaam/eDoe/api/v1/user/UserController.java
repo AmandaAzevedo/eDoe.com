@@ -10,7 +10,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/register")
+    @PostMapping("/")
     @ResponseStatus(code = HttpStatus.CREATED)
     public UserDTO createNewUser(@RequestBody UserCreateDTO userCreateDTO){
         return userService.createNewUser(userCreateDTO);

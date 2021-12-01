@@ -24,27 +24,27 @@ import tech.amandaam.eDoe.api.v1.user.exception.UserAlreadyExistsException;
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(UserAlreadyExistsException.class)
-    public ResponseEntity<StandardError> disciplineNotFoundException(UserAlreadyExistsException e) {
-        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+    public ResponseEntity<StandardError> userAlreadyExistsException(UserAlreadyExistsException e) {
+        StandardError err = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
     }
 
     @ExceptionHandler(InvalidNumberOfCaractersException.class)
     public ResponseEntity<StandardError> invalidNumberOfCaractersException(InvalidNumberOfCaractersException e) {
-        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+        StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 
     @ExceptionHandler(InvalidUserCategoryException.class)
     public ResponseEntity<StandardError> invalidUserCategoryException(InvalidUserCategoryException e) {
-        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+        StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 
     @ExceptionHandler(LoginOrPasswordInvalideException.class)
-    public ResponseEntity<StandardError> disciplineNotFoundException(LoginOrPasswordInvalideException e) {
-        StandardError err = new StandardError(HttpStatus.OK.value(), e.getMessage(), System.currentTimeMillis());
-        return ResponseEntity.status(HttpStatus.OK).body(err);
+    public ResponseEntity<StandardError> loginOrPasswordInvalideException(LoginOrPasswordInvalideException e) {
+        StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 
     @ExceptionHandler(PermissionDeniedException.class)
@@ -67,8 +67,8 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(DescriptorAlreadyExistsException.class)
     public ResponseEntity<StandardError> descriptorAlreadyExistsException(DescriptorAlreadyExistsException e) {
-        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+        StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 
     @ExceptionHandler(DescriptorOptionDoesNotExist.class)
@@ -91,19 +91,19 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(InvalidDescriptionException.class)
     public ResponseEntity<StandardError> invalidDescriptionException(InvalidDescriptionException e) {
-        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+        StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 
     @ExceptionHandler(MandatoryFieldNotFilledIn.class)
     public ResponseEntity<StandardError> mandatoryFieldNotFilledIn(MandatoryFieldNotFilledIn e) {
-        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+        StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 
     @ExceptionHandler(NumberOfItemsRequiredInvalidException.class)
-    public ResponseEntity<StandardError> mandatoryFieldNotFilledIn(NumberOfItemsRequiredInvalidException e) {
-        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+    public ResponseEntity<StandardError> numberOfItemsRequiredInvalidException(NumberOfItemsRequiredInvalidException e) {
+        StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 }

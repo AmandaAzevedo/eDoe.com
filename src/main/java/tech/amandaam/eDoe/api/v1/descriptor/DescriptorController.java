@@ -13,7 +13,7 @@ public class DescriptorController {
     @Autowired
     private DescriptorService descriptorService;
 
-    @PostMapping("/create")
+    @PostMapping("/")
     @ResponseStatus(code = HttpStatus.CREATED)
     public DescriptorDTO createDescriptor(@RequestBody DescriptorCreateDTO descriptorCreateDTO,@RequestHeader("Authorization") String header) throws ServletException {
         return descriptorService.createDescriptor(descriptorCreateDTO, header);
