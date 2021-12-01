@@ -11,7 +11,9 @@ CREATE TABLE item_table (
     quantity int8 NOT NULL,
     description_or_justification varchar(250) NOT NULL,
     item_type varchar(9) NOT NULL,
-    CONSTRAINT user_item_id_FK FOREIGN KEY (user_id) REFERENCES user_system(id) ON DELETE CASCADE
+    CONSTRAINT user_item_id_FK FOREIGN KEY (user_id) REFERENCES user_system(id) ON DELETE CASCADE,
+    CONSTRAINT item_pkey PRIMARY KEY (id)
+
 );
 
 CREATE TABLE item_descriptor(

@@ -8,5 +8,6 @@ CREATE SEQUENCE descriptor_sequence
 CREATE TABLE descriptor_table (
     id int8 NOT NULL DEFAULT nextval('descriptor_sequence'),
     name varchar(60) NOT NULL,
-    unique(name)
+    unique(name),
+    CONSTRAINT descriptor_pkey PRIMARY KEY (id)
 )

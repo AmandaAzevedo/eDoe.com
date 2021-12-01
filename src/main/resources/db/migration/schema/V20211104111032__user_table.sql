@@ -13,5 +13,7 @@ CREATE TABLE user_system (
     telephone varchar(16),
     user_category varchar(255),
     user_role varchar(15) NOT NULL,
-    unique(email)
+    unique(email),
+    CONSTRAINT user_pkey PRIMARY KEY (id)
+
 )
