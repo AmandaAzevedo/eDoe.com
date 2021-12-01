@@ -10,6 +10,6 @@ CREATE TABLE request (
     user_role_request varchar(15) NOT NULL,
     evaluation_result boolean NOT NULL,
     user_id int8 NOT NULL,
-    CONSTRAINT user_id_FK FOREIGN KEY (user_id) REFERENCES user_system(id) ON DELETE CASCADE
+    CONSTRAINT user_request_id_FK FOREIGN KEY (user_id) REFERENCES user_system(id) ON DELETE CASCADE
 
 )
